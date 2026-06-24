@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Descubra quantas vendas seu marketing precisa gerar para se pagar e começar a dar lucro.">
+  <meta name="theme-color" content="#4B2483">
+  <title>Calculadora de Retorno em Marketing | Agência Verticale</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Agência Verticale">
+      <span class="brand-mark">V</span>
+      <span><strong>VERTICALE</strong><small>estratégia que cresce</small></span>
+    </a>
+    <span class="header-badge">Diagnóstico gratuito</span>
+  </header>
+
+  <main>
+    <section id="intro" class="intro shell">
+      <div class="intro-copy">
+        <span class="eyebrow">CALCULADORA DE RETORNO EM MARKETING</span>
+        <h1>Seu investimento precisa de uma meta, não de um palpite.</h1>
+        <p>Responda algumas perguntas simples e descubra quantos leads e vendas seu marketing precisa gerar para recuperar o investimento e começar a produzir lucro.</p>
+        <div class="trust-row">
+          <span>✓ Sem planilhas</span>
+          <span>✓ Linguagem simples</span>
+          <span>✓ Resultado explicado</span>
+        </div>
+        <button id="startButton" class="button button-primary button-large">Calcular meu cenário <span>→</span></button>
+        <p class="microcopy">Leva cerca de 2 minutos. Nenhum resultado é prometido ou maquiado.</p>
+      </div>
+
+      <aside class="preview-card" aria-hidden="true">
+        <div class="preview-top"><span>Seu cenário</span><span class="live-dot">projeção</span></div>
+        <div class="preview-score"><small>Meta de equilíbrio</small><strong>8 vendas</strong></div>
+        <div class="preview-grid">
+          <div><small>Leads necessários</small><strong>67</strong></div>
+          <div><small>CPL máximo</small><strong>R$ 29</strong></div>
+          <div><small>Ticket médio</small><strong>R$ 800</strong></div>
+          <div><small>Margem</small><strong>60%</strong></div>
+        </div>
+        <div class="preview-message">“Agora você sabe qual número precisa perseguir.”</div>
+      </aside>
+    </section>
+
+    <section id="calculator" class="calculator-section shell" hidden>
+      <div class="wizard-header">
+        <div>
+          <span id="stepLabel" class="eyebrow">ETAPA 1 DE 10</span>
+          <h2 id="wizardTitle">Vamos entender seu negócio</h2>
+        </div>
+        <button id="exitButton" class="text-button" type="button">Recomeçar</button>
+      </div>
+      <div class="progress-track" aria-label="Progresso"><div id="progressBar" class="progress-bar"></div></div>
+
+      <form id="roiForm" class="wizard-card" novalidate>
+        <section class="step active" data-step="0" data-title="Vamos entender seu negócio">
+          <div class="question-icon">01</div>
+          <h3>Como podemos chamar sua empresa?</h3>
+          <p>Isso deixa o diagnóstico menos genérico e mais próximo da sua realidade.</p>
+          <label class="field-label" for="businessName">Nome da empresa</label>
+          <input id="businessName" name="business_name" type="text" maxlength="100" placeholder="Ex.: Clínica Sorriso" autocomplete="organization" required>
+          <label class="field-label" for="segment">Qual é o segmento?</label>
+          <input id="segment" name="segment" type="text" maxlength="100" placeholder="Ex.: clínica odontológica, academia, advocacia" required>
+        </section>
+
+        <section class="step" data-step="1" data-title="Como cada cliente gera receita">
+          <div class="question-icon">02</div>
+          <h3>Seu cliente compra uma vez ou paga todo mês?</h3>
+          <p>Negócios recorrentes precisam considerar o valor gerado ao longo da permanência.</p>
+          <div class="choice-grid">
+            <label class="choice-card">
+              <input type="radio" name="revenue_model" value="single" checked>
+              <span class="choice-icon">↗</span><strong>Venda única</strong><small>Produto, projeto ou serviço pontual</small>
+            </label>
+            <label class="choice-card">
+              <input type="radio" name="revenue_model" value="recurring">
+              <span class="choice-icon">↻</span><strong>Receita recorrente</strong><small>Mensalidade, contrato ou assinatura</small>
+            </label>
+          </div>
+        </section>
+
+        <section class="step" data-step="2" data-title="Valor gerado por cliente">
+          <div class="question-icon">03</div>
+          <h3 id="ticketQuestion">Qual é o valor médio de uma venda?</h3>
+          <p id="ticketHelp">Use a média real. Não escolha apenas o produto mais caro.</p>
+          <label class="field-label" for="averageTicket">Ticket médio</label>
+          <input id="averageTicket" name="average_ticket" class="money-input" type="text" inputmode="decimal" placeholder="R$ 800,00" required>
+          <div id="retentionGroup" hidden>
+            <label class="field-label" for="retentionMonths">Por quantos meses um cliente costuma permanecer?</label>
+            <div class="input-suffix"><input id="retentionMonths" name="retention_months" type="number" min="1" max="120" step="1" value="6"><span>meses</span></div>
+          </div>
+        </section>
+
+        <section class="step" data-step="3" data-title="Quanto realmente sobra">
+          <div class="question-icon">04</div>
+          <h3>De cada R$ 100 vendidos, quanto realmente sobra?</h3>
+          <p>Desconte o custo direto para entregar o produto ou serviço. Não precisa ser perfeito, uma boa estimativa já ajuda.</p>
+          <label class="field-label" for="grossMargin">Margem aproximada</label>
+          <div class="range-wrap">
+            <input id="grossMargin" name="gross_margin_pct" type="range" min="5" max="100" step="1" value="50">
+            <output id="grossMarginOutput">50%</output>
+          </div>
+          <div class="hint-box">Com margem de <strong id="marginHintValue">50%</strong>, uma venda de R$ 1.000 deixa cerca de <strong id="marginHintMoney">R$ 500</strong> antes do investimento em marketing.</div>
+        </section>
+
+        <section class="step" data-step="4" data-title="Investimento em mídia">
+          <div class="question-icon">05</div>
+          <h3>Quanto pretende investir em anúncios?</h3>
+          <p>Esse é o dinheiro enviado diretamente para Google, Meta, LinkedIn ou outra plataforma.</p>
+          <label class="field-label" for="adBudget">Orçamento mensal de mídia</label>
+          <input id="adBudget" name="ad_budget" class="money-input" type="text" inputmode="decimal" placeholder="R$ 2.000,00" required>
+        </section>
+
+        <section class="step" data-step="5" data-title="Outros custos do projeto">
+          <div class="question-icon">06</div>
+          <h3>Além dos anúncios, quanto custará a operação?</h3>
+          <p>Inclua gestão, criação, landing page, ferramentas ou qualquer custo necessário para a campanha funcionar.</p>
+          <label class="field-label" for="serviceCost">Gestão ou serviço de marketing <span>(use zero se não houver)</span></label>
+          <input id="serviceCost" name="service_cost" class="money-input" type="text" inputmode="decimal" placeholder="R$ 1.000,00">
+          <label class="field-label" for="extraCosts">Outros custos <span>(opcional)</span></label>
+          <input id="extraCosts" name="extra_costs" class="money-input" type="text" inputmode="decimal" placeholder="R$ 0,00">
+        </section>
+
+        <section class="step" data-step="6" data-title="Capacidade de transformar contatos em clientes">
+          <div class="question-icon">07</div>
+          <h3>De cada 10 interessados, quantos costumam comprar?</h3>
+          <p>Pense nos contatos que realmente chegam ao WhatsApp, formulário ou equipe comercial.</p>
+          <div class="conversion-picker" id="conversionPicker">
+            <button type="button" data-value="10">1</button>
+            <button type="button" data-value="20" class="selected">2</button>
+            <button type="button" data-value="30">3</button>
+            <button type="button" data-value="40">4</button>
+            <button type="button" data-value="50">5</button>
+            <button type="button" data-value="60">6</button>
+            <button type="button" data-value="70">7</button>
+            <button type="button" data-value="80">8</button>
+            <button type="button" data-value="90">9</button>
+            <button type="button" data-value="100">10</button>
+          </div>
+          <input id="closeRate" name="close_rate_pct" type="hidden" value="20">
+          <div class="hint-box"><strong id="conversionText">2 em cada 10</strong> significa uma taxa de fechamento de <strong id="conversionPercent">20%</strong>.</div>
+        </section>
+
+        <section class="step" data-step="7" data-title="Custo de cada oportunidade">
+          <div class="question-icon">08</div>
+          <h3>Você sabe quanto costuma pagar por um lead?</h3>
+          <p>Lead é uma pessoa que demonstrou interesse e entrou em contato. Não é curtida nem visualização.</p>
+          <div class="choice-grid compact">
+            <label class="choice-card">
+              <input type="radio" name="knows_cpl" value="yes" checked>
+              <strong>Sim, tenho uma estimativa</strong><small>Permitirá projetar três cenários</small>
+            </label>
+            <label class="choice-card">
+              <input type="radio" name="knows_cpl" value="no">
+              <strong>Não faço ideia</strong><small>Mostraremos o CPL máximo sustentável</small>
+            </label>
+          </div>
+          <div id="cplGroup">
+            <label class="field-label" for="cpl">Custo médio por lead</label>
+            <input id="cpl" name="cpl" class="money-input" type="text" inputmode="decimal" placeholder="R$ 30,00">
+          </div>
+        </section>
+
+        <section class="step" data-step="8" data-title="Uma última conferência">
+          <div class="question-icon">09</div>
+          <h3>Veja se entendemos corretamente</h3>
+          <p>Você ainda poderá voltar e ajustar qualquer resposta.</p>
+          <div id="reviewBox" class="review-box"></div>
+        </section>
+
+        <section class="step" data-step="9" data-title="Para quem entregamos o diagnóstico?">
+          <div class="question-icon">10</div>
+          <h3>Falta apenas identificar seu relatório</h3>
+          <p>Seus dados também permitem que a Verticale entre em contato caso você queira ajuda para interpretar ou aplicar o diagnóstico.</p>
+          <label class="field-label" for="contactName">Seu nome</label>
+          <input id="contactName" type="text" maxlength="100" placeholder="Como podemos chamar você?" autocomplete="name" required>
+          <div class="two-columns">
+            <div><label class="field-label" for="contactPhone">WhatsApp</label><input id="contactPhone" type="tel" maxlength="20" placeholder="(12) 99999-9999" autocomplete="tel" required></div>
+            <div><label class="field-label" for="contactEmail">E-mail <span>(opcional)</span></label><input id="contactEmail" type="email" maxlength="160" placeholder="voce@empresa.com" autocomplete="email"></div>
+          </div>
+          <label class="consent"><input id="consent" type="checkbox" required><span>Concordo com o uso dos dados para gerar o diagnóstico e receber contato sobre esta análise. Consulte a <a href="{{ privacy_url }}" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>
+        </section>
+
+        <div id="formError" class="form-error" role="alert" hidden></div>
+        <div class="wizard-actions">
+          <button id="backButton" class="button button-secondary" type="button" disabled>Voltar</button>
+          <button id="nextButton" class="button button-primary" type="button">Continuar <span>→</span></button>
+        </div>
+      </form>
+    </section>
+
+    <section id="loading" class="loading-section shell" hidden>
+      <div class="loading-card">
+        <div class="loader-orbit"><span></span></div>
+        <span class="eyebrow">ORGANIZANDO SEUS NÚMEROS</span>
+        <h2>Calculando o que precisa acontecer para o investimento fazer sentido...</h2>
+        <div class="loading-list"><span class="done">✓ Investimento total</span><span>• Ponto de equilíbrio</span><span>• Cenários e diagnóstico</span></div>
+      </div>
+    </section>
+
+    <section id="results" class="results-section shell" hidden>
+      <div class="results-heading">
+        <span class="eyebrow">DIAGNÓSTICO CONCLUÍDO</span>
+        <h2 id="resultTitle">O mapa financeiro do seu investimento</h2>
+        <p id="resultSummary"></p>
+      </div>
+
+      <div id="verdictCard" class="verdict-card"><span class="verdict-icon">◎</span><div><small>Leitura da análise</small><strong id="resultVerdict"></strong></div></div>
+
+      <div class="metric-grid">
+        <article class="metric-card featured"><small>Investimento total</small><strong id="metricInvestment">R$ 0</strong><span>Anúncios + operação</span></article>
+        <article class="metric-card"><small>Clientes para empatar</small><strong id="metricCustomers">0</strong><span>Ponto de equilíbrio</span></article>
+        <article class="metric-card"><small>Leads necessários</small><strong id="metricLeads">0</strong><span>Com sua conversão atual</span></article>
+        <article class="metric-card"><small>CPL máximo de mídia</small><strong id="metricMaxCpl">R$ 0</strong><span>Meta para cobrir o investimento</span></article>
+      </div>
+
+      <div id="forecastArea" class="forecast-area" hidden>
+        <div class="section-title"><div><span class="eyebrow">TRÊS POSSIBILIDADES</span><h3>O retorno muda quando custo e conversão oscilam</h3></div><p>Não são promessas. São cenários matemáticos baseados nas respostas.</p></div>
+        <div id="scenarioGrid" class="scenario-grid"></div>
+      </div>
+
+      <div class="analysis-grid">
+        <article class="analysis-card"><span class="card-kicker">O QUE OS NÚMEROS DIZEM</span><ul id="insightsList"></ul></article>
+        <article class="analysis-card"><span class="card-kicker">PRÓXIMOS PASSOS</span><ol id="nextStepsList"></ol></article>
+      </div>
+
+      <div class="cta-card">
+        <div><span class="eyebrow">NÚMEROS SEM EXECUÇÃO CONTINUAM SENDO NÚMEROS</span><h3>Quer transformar esta projeção em um plano de marketing?</h3><p>A Verticale pode revisar sua oferta, estrutura de captação e processo comercial antes de colocar orçamento em jogo.</p></div>
+        <a id="whatsappCta" class="button button-light" href="#" target="_blank" rel="noopener">Conversar sobre meu cenário <span>↗</span></a>
+      </div>
+
+      <p id="resultDisclaimer" class="disclaimer"></p>
+      <button id="restartResults" class="text-button centered" type="button">Refazer com outros números</button>
+    </section>
+  </main>
+
+  <footer>© 2026 Agência Verticale. Estratégia antes do orçamento.</footer>
+
+  <script>
+    window.APP_CONFIG = {
+      whatsappNumber: {{ whatsapp_number|tojson }}
+    };
+  </script>
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>
