@@ -73,6 +73,23 @@ Se `LEAD_WEBHOOK_URL` estiver configurada, a aplicação envia um POST com esta 
 
 No Make ou n8n, use um webhook de entrada e depois crie ou atualize o contato no Kommo.
 
+### Salvar leads no Google Sheets
+
+Uma opção simples é usar uma planilha do Google Sheets com Google Apps Script:
+
+1. Crie uma planilha no Google Sheets.
+2. Abra **Extensões > Apps Script**.
+3. Cole o conteúdo de `integrations/google-sheets-webhook.gs`.
+4. Salve o projeto.
+5. Clique em **Implantar > Nova implantação**.
+6. Escolha o tipo **App da Web**.
+7. Em **Executar como**, selecione você.
+8. Em **Quem pode acessar**, selecione qualquer pessoa com o link.
+9. Autorize o script e copie a URL do Web App.
+10. Na Render, use essa URL como `LEAD_WEBHOOK_URL`.
+
+Quando a calculadora receber um lead, o script cria/usa a aba `Leads` e adiciona uma nova linha com contato, métricas principais, diagnóstico e JSON bruto.
+
 ## Princípio de segurança
 
 A Groq nunca calcula o ROI. Ela recebe os resultados já calculados e apenas os traduz para uma explicação. Se a API falhar, estiver sem saldo ou retornar algo inválido, o usuário ainda recebe uma análise local.
